@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
 project(FreeImage VERSION 3.19.0 LANGUAGES C CXX)
 
+set(C_STANDARD 99)
+set(CPP_STANDARD 11)
+
 # Options for configuring the build
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(BUILD_JXR "Build JPEG-XR support" WIN32)
@@ -140,6 +143,10 @@ set(FreeImage_SOURCES
     Source/LibOpenJPEG/opj_clock.c Source/LibOpenJPEG/pi.c Source/LibOpenJPEG/raw.c
     Source/LibOpenJPEG/t1.c Source/LibOpenJPEG/t2.c Source/LibOpenJPEG/tcd.c
     Source/LibOpenJPEG/tgt.c ./Source/CacheFile.h ./Source/FreeImage ./Source/FreeImage.h
+        Wrapper/FreeImagePlus/FreeImagePlus.h Wrapper/FreeImagePlus/src/fipImage.cpp Wrapper/FreeImagePlus/src/fipMemoryIO.cpp
+        Wrapper/FreeImagePlus/src/fipMetadataFind.cpp Wrapper/FreeImagePlus/src/fipMultiPage.cpp
+        Wrapper/FreeImagePlus/src/fipTag.cpp Wrapper/FreeImagePlus/src/fipWinImage.cpp
+        Wrapper/FreeImagePlus/src/FreeImagePlus.cpp
     ./Source/FreeImageIO.h ./Source/LibJPEG/cderror.h ./Source/LibJPEG/cdjpeg.h
     ./Source/LibJPEG/jconfig.h ./Source/LibJPEG/jdct.h ./Source/LibJPEG/jerror.h
     ./Source/LibJPEG/jinclude.h ./Source/LibJPEG/jpegint.h ./Source/LibJPEG/jpeglib.h
@@ -554,6 +561,7 @@ if(BUILD_OPENEXR)
     include_directories(Source/OpenEXR/IexMath)
     include_directories(Source/OpenEXR/Imath)
     add_definitions(-DINCLUDE_LIB_OPENEXR)
+    add_definitions(-DINCLUDE_LIB_OPEN_EXR)
 endif()
 
 # Need include directories for FreeImage and all the sub libs
